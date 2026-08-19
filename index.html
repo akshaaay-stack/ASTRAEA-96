@@ -1,0 +1,1272 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTRAEA ✦ JAIN University Kochi Work-Integrated BCA</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            space: {
+              950: '#070510',
+              900: '#0f0a21',
+              800: '#181236',
+              700: '#261e4f',
+            },
+            aether: '#818cf8',
+            nova: '#c084fc',
+            quanta: '#38bdf8',
+            lumina: '#f472b6',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Cosmic Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-[#070510] text-slate-100 min-h-screen relative selection:bg-indigo-500 selection:text-white pb-16">
+
+  <!-- Background Cosmic Canvas -->
+  <canvas id="cosmic-canvas"></canvas>
+
+  <!-- Radial Nebula Glows -->
+  <div class="nebula-glow-1"></div>
+  <div class="nebula-glow-2"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- Institutional Global Header Bar -->
+  <header class="relative z-40 bg-[#070510]/90 backdrop-blur-md border-b border-white/10 px-4 py-2.5 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-mono font-bold text-white tracking-wider">ASTRAEA ✦</span>
+        </div>
+        <span class="text-slate-500 hidden sm:inline">|</span>
+        <span class="text-slate-300 font-medium hidden sm:inline">JAIN (Deemed-to-be University) Kochi</span>
+        <span class="text-slate-500 hidden md:inline">•</span>
+        <span class="text-indigo-400 font-mono text-[11px] hidden md:inline">Kochi Knowledge Park Campus</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span class="text-[11px] text-slate-400 font-mono hidden sm:inline">Work-Integrated BCA Academic Layer</span>
+        
+        <button id="btn-toggle-audio" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-colors flex items-center gap-1.5" title="Toggle Ambient Cosmic Synthesizer">
+          <span class="audio-icon">🔊</span>
+          <span class="hidden lg:inline text-[11px]">Cosmic Audio</span>
+        </button>
+
+        <button onclick="window.astraeaAuth.logout()" class="text-slate-400 hover:text-white text-[11px] transition-colors">
+          Portal Exit
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar (Active within Universe Ecosystem) -->
+  <nav id="main-navbar" class="hidden sticky top-0 z-40 bg-[#070510]/85 backdrop-blur-xl border-b border-white/10 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="window.app.navigate('view-universe')">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">
+          ✦
+        </div>
+        <div>
+          <span class="font-display font-bold text-base tracking-wider text-white">ASTRAEA</span>
+          <span class="block text-[9px] font-mono text-indigo-400 -mt-1">JAIN UNIVERSITY KOCHI</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden lg:flex items-center gap-1 font-medium text-xs">
+        <button data-nav-target="view-universe" class="px-3 py-2 rounded-lg hover:text-white transition-colors">
+          🪐 Universe
+        </button>
+        <button data-nav-target="view-ai" class="px-3 py-2 rounded-lg hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="text-indigo-400">🧠</span> ASTRAEA AI
+        </button>
+        <button data-nav-target="view-nextmove" class="px-3 py-2 rounded-lg hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="text-amber-400">⚡</span> Next Move
+        </button>
+        <button data-nav-target="view-opportunities" class="px-3 py-2 rounded-lg hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="text-sky-400">🛰️</span> Opportunities & Teams
+        </button>
+        <button data-nav-target="view-campus" class="px-3 py-2 rounded-lg hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="text-pink-400">🔮</span> Campus Intel
+        </button>
+        <button data-nav-target="view-profile" class="px-3 py-2 rounded-lg hover:text-white transition-colors flex items-center gap-1.5">
+          <span class="text-emerald-400">🧬</span> Student DNA
+        </button>
+        <button data-nav-target="view-settings" class="px-3 py-2 rounded-lg hover:text-white transition-colors">
+          ⚙️ Trust Center
+        </button>
+      </div>
+
+      <!-- User Session Pill & Logout -->
+      <div class="flex items-center gap-3">
+        <button onclick="window.app.navigate('view-profile')" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-indigo-400/40 transition-all text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span id="nav-user-label" class="font-semibold text-slate-200">Verified BCA Star</span>
+        </button>
+        <button onclick="window.astraeaAuth.logout()" class="text-slate-400 hover:text-rose-400 text-xs px-2 py-1 rounded transition-colors" title="Lock & Logout">
+          Exit ➔
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       VIEW 1: IMMERSIVE LANDING PAGE
+       ========================================================================= -->
+  <section id="view-landing" class="app-view relative z-10 max-w-5xl mx-auto px-4 pt-16 md:pt-24 pb-20 text-center flex flex-col items-center justify-center">
+    
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-6 animate-pulse-slow">
+      <span>✦</span>
+      <span>JAIN (Deemed-to-be University) Kochi</span>
+      <span class="text-slate-500">•</span>
+      <span>Work-Integrated BCA</span>
+    </div>
+
+    <h1 class="font-display text-5xl md:text-7xl font-black tracking-tight text-white mb-4 drop-shadow-2xl">
+      ASTRAEA <span class="text-indigo-400">✦</span>
+    </h1>
+
+    <p class="font-display text-xl md:text-2xl font-medium text-slate-300 max-w-2xl mx-auto mb-2">
+      Your BCA. Your Universe. Your Next Move.
+    </p>
+
+    <p class="text-xs md:text-sm text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">
+      A private academic and career intelligence universe designed specifically for the four worlds of Work-Integrated BCA. Sits above your university portal as an intelligent student layer.
+    </p>
+
+    <!-- Professional CTAs -->
+    <div class="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full max-w-md">
+      <button onclick="window.app.navigate('view-student-step1')" class="w-full sm:w-auto flex-1 px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-500 hover:opacity-95 text-white font-bold text-sm tracking-wide shadow-xl shadow-indigo-500/30 transition-all transform hover:-translate-y-0.5">
+        STUDENT ACCESS ➔
+      </button>
+
+      <button onclick="window.app.navigate('view-admin-step1')" class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs font-semibold tracking-wider transition-all">
+        🧑‍🏫 FACULTY PORTAL LOGIN
+      </button>
+    </div>
+
+    <!-- The 4 BCA Worlds Preview -->
+    <div class="w-full text-left">
+      <div class="text-center mb-6">
+        <span class="text-xs uppercase tracking-widest font-mono text-indigo-400">The Four Worlds of Work-Integrated BCA</span>
+        <p class="text-xs text-slate-400 mt-1">Synthesizes full product squads across four specialized disciplines.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Nova -->
+        <div class="glass-panel p-5 rounded-2xl border border-purple-500/20 hover:border-purple-500/50 transition-all">
+          <div class="text-3xl mb-2">🟣</div>
+          <h3 class="font-display font-bold text-white text-base">NOVA</h3>
+          <p class="text-xs text-purple-300 font-medium mb-2">Full Stack AI Development</p>
+          <p class="text-[11px] text-slate-400 leading-relaxed">Autonomous agents, microservices, cloud deployments & Next.js architectures.</p>
+        </div>
+
+        <!-- Aether -->
+        <div class="glass-panel p-5 rounded-2xl border border-indigo-500/20 hover:border-indigo-500/50 transition-all">
+          <div class="text-3xl mb-2">🪻</div>
+          <h3 class="font-display font-bold text-white text-base">AETHER</h3>
+          <p class="text-xs text-indigo-300 font-medium mb-2">Gen AI & Tech Management</p>
+          <p class="text-[11px] text-slate-400 leading-relaxed">Context engineering, prompt pipelines, multimodal LLMs & tech leadership.</p>
+        </div>
+
+        <!-- Quanta -->
+        <div class="glass-panel p-5 rounded-2xl border border-sky-500/20 hover:border-sky-500/50 transition-all">
+          <div class="text-3xl mb-2">🔵</div>
+          <h3 class="font-display font-bold text-white text-base">QUANTA</h3>
+          <p class="text-xs text-sky-300 font-medium mb-2">Applied AI & Data Analytics</p>
+          <p class="text-[11px] text-slate-400 leading-relaxed">Statistical inference, vector search math, big data pipelines & machine learning.</p>
+        </div>
+
+        <!-- Lumina -->
+        <div class="glass-panel p-5 rounded-2xl border border-pink-500/20 hover:border-pink-500/50 transition-all">
+          <div class="text-3xl mb-2">🌸</div>
+          <h3 class="font-display font-bold text-white text-base">LUMINA</h3>
+          <p class="text-xs text-pink-300 font-medium mb-2">Design Technology</p>
+          <p class="text-[11px] text-slate-400 leading-relaxed">Generative UI/UX, cognitive ergonomics, spatial 3D web & design systems.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       VIEW 2: STUDENT TWO-STEP VERIFICATION — STEP 01: COLLEGE IDENTITY
+       ========================================================================= -->
+  <section id="view-student-step1" class="app-view hidden relative z-10 max-w-lg mx-auto px-4 pt-16 pb-20">
+    <div class="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl">
+      
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-indigo-600/30 border border-indigo-400/40 flex items-center justify-center text-xs font-bold text-indigo-300">01</span>
+          <span class="text-xs font-mono uppercase tracking-wider text-indigo-300 font-semibold">Student Verification</span>
+        </div>
+        <span class="text-[10px] text-slate-400">Step 1 of 2</span>
+      </div>
+
+      <h2 class="font-display text-2xl font-bold text-white mb-1">Verify College Identity</h2>
+      <p class="text-xs text-slate-400 mb-6">
+        Enter your university email or registered Google Mail ID to access the Work-Integrated BCA ecosystem.
+      </p>
+
+      <form id="form-student-step1" class="space-y-4">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Email Address (College Mail or Gmail)</label>
+          <input type="email" id="student-email" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="e.g. yourname@gmail.com or yourname.bca24@jainuniversity.ac.in" value="aarav.sharma@jainuniversity.ac.in" required>
+          <span class="text-[10px] text-slate-400 mt-1 block">Accepts institutional (@jainuniversity.ac.in, @jain.ac.in) and Google Mail (@gmail.com)</span>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Student Roll Number / University ID</label>
+          <input type="text" id="student-id" class="w-full px-4 py-3 rounded-xl glass-input text-xs font-mono uppercase" placeholder="e.g. JU24BCA-A042" value="JU24BCA-A042" required>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Full Name</label>
+          <input type="text" id="student-fullname" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="e.g. Aarav Sharma" value="Aarav Sharma" required>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Specialisation</label>
+            <select id="student-specialisation" class="w-full px-3 py-3 rounded-xl glass-input text-xs">
+              <option value="aether" selected>🪻 AETHER (Gen AI & Tech)</option>
+              <option value="nova">🟣 NOVA (Full Stack AI)</option>
+              <option value="quanta">🔵 QUANTA (Applied AI & Data)</option>
+              <option value="lumina">🌸 LUMINA (Design Tech)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Current Semester</label>
+            <select id="student-semester" class="w-full px-3 py-3 rounded-xl glass-input text-xs">
+              <option value="1" selected>Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs tracking-wider shadow-lg shadow-indigo-600/30 transition-all">
+            PROCEED TO STEP 02: EMAIL OTP ➔
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-6 pt-4 border-t border-white/5 text-center">
+        <button onclick="window.app.navigate('view-landing')" class="text-xs text-slate-400 hover:text-white">← Return to Landing</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 3: STUDENT TWO-STEP VERIFICATION — STEP 02: EMAIL OTP
+       ========================================================================= -->
+  <section id="view-student-step2" class="app-view hidden relative z-10 max-w-md mx-auto px-4 pt-16 pb-20">
+    <div class="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl">
+      
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-emerald-600/30 border border-emerald-400/40 flex items-center justify-center text-xs font-bold text-emerald-300">02</span>
+          <span class="text-xs font-mono uppercase tracking-wider text-emerald-300 font-semibold">Identity Verification</span>
+        </div>
+        <span class="text-[10px] text-slate-400">Step 2 of 2</span>
+      </div>
+
+      <h2 class="font-display text-2xl font-bold text-white mb-1">Enter Verification Code</h2>
+      <p class="text-xs text-slate-400 mb-4">
+        A 6-digit security code was dispatched to:
+      </p>
+
+      <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 mb-6 flex items-center justify-between">
+        <div>
+          <span id="otp-sent-email-display" class="font-mono text-xs text-indigo-300 block truncate">student@jainuniversity.ac.in</span>
+          <span id="otp-email-type-badge" class="text-[10px] text-emerald-400 font-semibold">Institutional Verified</span>
+        </div>
+        <span class="text-[10px] text-slate-400 font-mono">Dispatched ✓</span>
+      </div>
+
+      <!-- 6-digit OTP Inputs -->
+      <div class="flex justify-between gap-2 mb-6">
+        <input type="text" maxlength="1" class="otp-digit-box student-otp-input" data-index="0" autofocus>
+        <input type="text" maxlength="1" class="otp-digit-box student-otp-input" data-index="1">
+        <input type="text" maxlength="1" class="otp-digit-box student-otp-input" data-index="2">
+        <input type="text" maxlength="1" class="otp-digit-box student-otp-input" data-index="3">
+        <input type="text" maxlength="1" class="otp-digit-box student-otp-input" data-index="4">
+        <input type="text" maxlength="1" class="otp-digit-box student-otp-input" data-index="5">
+      </div>
+
+      <button id="btn-submit-student-otp" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-500 hover:opacity-95 text-white font-bold text-xs tracking-wider shadow-lg shadow-indigo-600/30 transition-all mb-4">
+        ✦ CONFIRM IDENTITY & ENTER ASTRAEA
+      </button>
+
+      <div class="flex items-center justify-between text-xs text-slate-400">
+        <span id="student-otp-timer">Resend available in 45s</span>
+        <button id="btn-student-resend-otp" disabled onclick="window.astraeaAuth.resendStudentOTP(); window.app.showToast('New verification code sent to your email inbox.', 'info');" class="text-indigo-400 hover:underline disabled:opacity-40 disabled:no-underline">
+          Resend Code
+        </button>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-white/5 text-center">
+        <button onclick="window.app.navigate('view-student-step1')" class="text-xs text-slate-400 hover:text-white">← Edit Identity Details</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 4: TEACHER ADMIN LOGIN — STEP 01
+       ========================================================================= -->
+  <section id="view-admin-step1" class="app-view hidden relative z-10 max-w-lg mx-auto px-4 pt-16 pb-20">
+    <div class="glass-panel p-8 rounded-3xl border border-amber-500/30 shadow-2xl">
+      
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-amber-600/30 border border-amber-400/40 flex items-center justify-center text-xs font-bold text-amber-300">🔐</span>
+          <span class="text-xs font-mono uppercase tracking-wider text-amber-300 font-semibold">Faculty Clearance</span>
+        </div>
+        <span class="text-[10px] text-slate-400">Step 1 of 2</span>
+      </div>
+
+      <h2 class="font-display text-2xl font-bold text-white mb-1">Faculty & Teacher Portal</h2>
+      <p class="text-xs text-slate-400 mb-6">
+        Enter your official university email or authorized Gmail account to access the Academic Command Deck.
+      </p>
+
+      <form id="form-admin-step1" class="space-y-4">
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Faculty Staff ID</label>
+          <input type="text" id="admin-staff-id" class="w-full px-4 py-3 rounded-xl glass-input text-xs font-mono uppercase" placeholder="e.g. JU-FAC-901" value="JU-FAC-901" required>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Official Faculty Email (College Mail or Gmail)</label>
+          <input type="email" id="admin-email" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="e.g. radhakrishnan.k@jainuniversity.ac.in or faculty@gmail.com" value="radhakrishnan.k@jainuniversity.ac.in" required>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Faculty Member Name</label>
+          <input type="text" id="admin-name" class="w-full px-4 py-3 rounded-xl glass-input text-xs" value="Dr. Radhakrishnan K." required>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Specialisation Department</label>
+          <input type="text" id="admin-department" class="w-full px-4 py-3 rounded-xl glass-input text-xs" value="BCA Generative AI & Tech Management" required>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Faculty Master Passkey</label>
+          <input type="password" id="admin-key" class="w-full px-4 py-3 rounded-xl glass-input text-xs font-mono" value="••••••••••••" placeholder="Faculty Key" required>
+        </div>
+
+        <div class="pt-4">
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs tracking-wider shadow-lg shadow-amber-600/30 transition-all">
+            PROCEED TO FACULTY 2FA KEY ➔
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-6 pt-4 border-t border-white/5 text-center">
+        <button onclick="window.app.navigate('view-landing')" class="text-xs text-slate-400 hover:text-white">← Return to Landing</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 5: TEACHER ADMIN LOGIN — STEP 02: FACULTY 2FA
+       ========================================================================= -->
+  <section id="view-admin-step2" class="app-view hidden relative z-10 max-w-md mx-auto px-4 pt-16 pb-20">
+    <div class="glass-panel p-8 rounded-3xl border border-amber-500/30 shadow-2xl">
+      
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-amber-600/30 border border-amber-400/40 flex items-center justify-center text-xs font-bold text-amber-300">02</span>
+          <span class="text-xs font-mono uppercase tracking-wider text-amber-300 font-semibold">Faculty Security Token</span>
+        </div>
+        <span class="text-[10px] text-slate-400">Step 2 of 2</span>
+      </div>
+
+      <h2 class="font-display text-2xl font-bold text-white mb-1">Faculty 2FA Key</h2>
+      <p class="text-xs text-slate-400 mb-4">
+        Enter the 6-digit Authenticator Token assigned to:
+      </p>
+
+      <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 mb-6 flex items-center justify-between">
+        <div>
+          <span id="admin-otp-sent-email-display" class="font-mono text-xs text-amber-300 block truncate">radhakrishnan.k@jainuniversity.ac.in</span>
+          <span class="text-[10px] text-emerald-400 font-semibold">Faculty Clearance Active</span>
+        </div>
+        <span class="text-[10px] text-slate-400 font-mono">Dispatched ✓</span>
+      </div>
+
+      <!-- 6-digit OTP Inputs -->
+      <div class="flex justify-between gap-2 mb-6">
+        <input type="text" maxlength="1" class="otp-digit-box admin-otp-input" data-index="0" autofocus>
+        <input type="text" maxlength="1" class="otp-digit-box admin-otp-input" data-index="1">
+        <input type="text" maxlength="1" class="otp-digit-box admin-otp-input" data-index="2">
+        <input type="text" maxlength="1" class="otp-digit-box admin-otp-input" data-index="3">
+        <input type="text" maxlength="1" class="otp-digit-box admin-otp-input" data-index="4">
+        <input type="text" maxlength="1" class="otp-digit-box admin-otp-input" data-index="5">
+      </div>
+
+      <button id="btn-submit-admin-otp" class="w-full py-3.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs tracking-wider shadow-lg shadow-amber-600/30 transition-all mb-4">
+        ✦ VERIFY FACULTY CLEARANCE & ENTER COMMAND DECK
+      </button>
+
+      <div class="flex items-center justify-between text-xs text-slate-400">
+        <span id="admin-otp-timer">Resend available in 45s</span>
+        <button id="btn-admin-resend-otp" disabled onclick="window.astraeaAuth.resendAdminOTP(); window.app.showToast('New 2FA code sent to your faculty email.', 'info');" class="text-amber-400 hover:underline disabled:opacity-40 disabled:no-underline">
+          Resend Token
+        </button>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-white/5 text-center">
+        <button onclick="window.app.navigate('view-admin-step1')" class="text-xs text-slate-400 hover:text-white">← Back to Faculty Step 1</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 6: STUDENT ONBOARDING — CREATE YOUR STAR
+       ========================================================================= -->
+  <section id="view-onboarding" class="app-view hidden relative z-10 max-w-2xl mx-auto px-4 pt-16 pb-20">
+    <div class="glass-panel p-8 rounded-3xl border border-indigo-500/30 shadow-2xl">
+      
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-xs font-mono uppercase tracking-widest text-indigo-400 font-semibold">🧑‍🚀 Onboarding Protocol</span>
+        <span id="onboarding-step-indicator" class="text-xs font-mono text-slate-400">Step 01 of 03</span>
+      </div>
+
+      <h2 class="font-display text-3xl font-bold text-white mb-2">Create Your Star ✦</h2>
+      <p class="text-xs text-slate-400 mb-8">
+        ASTRAEA doesn't just throw you into a dashboard. It molds the academic galaxy to your cognitive profile.
+      </p>
+
+      <!-- Step 1: Interests -->
+      <div id="onboarding-step-1" class="onboarding-step-view space-y-4">
+        <h3 class="font-display text-base font-bold text-white">Who are you becoming? (Select your driving interests)</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div data-value="AI" class="onboarding-interest-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            🤖 AI
+          </div>
+          <div data-value="Software Development" class="onboarding-interest-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            💻 Software Dev
+          </div>
+          <div data-value="Data" class="onboarding-interest-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            📊 Data
+          </div>
+          <div data-value="Design" class="onboarding-interest-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            🎨 Design
+          </div>
+          <div data-value="Entrepreneurship" class="onboarding-interest-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            🚀 Founder
+          </div>
+          <div data-value="Research" class="onboarding-interest-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            🔬 Research
+          </div>
+          <div data-value="Product" class="onboarding-interest-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            📱 Product
+          </div>
+          <div data-value="Marketing" class="onboarding-interest-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            📡 Growth
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Learning Style -->
+      <div id="onboarding-step-2" class="onboarding-step-view hidden space-y-4">
+        <h3 class="font-display text-base font-bold text-white">How do you learn best?</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div data-value="Visual" class="onboarding-style-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            👁️ Visual & Maps
+          </div>
+          <div data-value="Practical" class="onboarding-style-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            🛠️ Practical Labs
+          </div>
+          <div data-value="Reading" class="onboarding-style-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            📚 Reading Theory
+          </div>
+          <div data-value="Building" class="onboarding-style-chip p-4 rounded-xl border border-indigo-400 bg-indigo-600 text-white text-xs font-medium cursor-pointer transition-all text-center">
+            🏗️ Building Projects
+          </div>
+          <div data-value="Discussion" class="onboarding-style-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            💬 Peer Discussion
+          </div>
+          <div data-value="Mixed" class="onboarding-style-chip p-4 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            ⚡ Mixed Adaptive
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Career Direction -->
+      <div id="onboarding-step-3" class="onboarding-step-view hidden space-y-4">
+        <h3 class="font-display text-base font-bold text-white">Where do you want to go? (Target Trajectory)</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div data-value="AI Engineer" class="onboarding-career-chip p-3.5 rounded-xl border border-indigo-400 bg-indigo-600 text-white text-xs font-medium cursor-pointer transition-all text-center">
+            AI Engineer
+          </div>
+          <div data-value="Full Stack Developer" class="onboarding-career-chip p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            Full Stack Dev
+          </div>
+          <div data-value="Data Analyst" class="onboarding-career-chip p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            Data Analyst
+          </div>
+          <div data-value="Designer" class="onboarding-career-chip p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            UI/UX Designer
+          </div>
+          <div data-value="Product Manager" class="onboarding-career-chip p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            Product Manager
+          </div>
+          <div data-value="Founder" class="onboarding-career-chip p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            Startup Founder
+          </div>
+          <div data-value="Researcher" class="onboarding-career-chip p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-400 text-xs font-medium cursor-pointer transition-all text-center">
+            AI Researcher
+          </div>
+          <div data-value="Not sure yet" class="onboarding-career-chip p-3.5 rounded-xl border border-purple-500/40 bg-purple-950/30 text-purple-200 text-xs font-medium cursor-pointer transition-all text-center">
+            ✦ Not sure yet
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-400 italic">"Not sure yet" is warmly supported. ASTRAEA will help you discover your path.</p>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-white/10 flex items-center justify-end">
+        <button id="btn-onboarding-next" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition-all">
+          Next Phase ➔
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 7: UNIVERSE & ACADEMIC GALAXY
+       ========================================================================= -->
+  <section id="view-universe" class="app-view hidden relative z-10 max-w-7xl mx-auto px-4 pt-8 pb-20">
+    
+    <!-- Central Universe Header -->
+    <div class="text-center max-w-2xl mx-auto mb-8">
+      <span class="text-xs uppercase tracking-widest font-mono text-indigo-400 font-semibold">Your Academic Universe</span>
+      <h2 class="font-display text-3xl font-extrabold text-white mt-1">Four Worlds. One Living System.</h2>
+      <p class="text-xs text-slate-400 mt-1">At the center is YOU. Surrounding you are the four specialisation worlds of JAIN University BCA.</p>
+    </div>
+
+    <!-- 4 BCA World Orbit Overview Cards -->
+    <div id="universe-planets-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+      <!-- Injected via universe.js -->
+    </div>
+
+    <!-- Semester Galaxy Switcher -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/10 mb-8">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+        <div id="academic-galaxy-header">
+          <!-- Injected via universe.js -->
+        </div>
+
+        <!-- Semester Selector Pills -->
+        <div class="flex items-center gap-1.5 p-1 rounded-2xl bg-white/5 border border-white/10 overflow-x-auto max-w-full">
+          <button data-sem="1" class="sem-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white border border-indigo-400 transition-all">Sem 1</button>
+          <button data-sem="2" class="sem-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/5 text-slate-400 border border-white/10 hover:text-white transition-all">Sem 2</button>
+          <button data-sem="3" class="sem-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/5 text-slate-400 border border-white/10 hover:text-white transition-all">Sem 3</button>
+          <button data-sem="4" class="sem-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/5 text-slate-400 border border-white/10 hover:text-white transition-all">Sem 4</button>
+          <button data-sem="5" class="sem-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/5 text-slate-400 border border-white/10 hover:text-white transition-all">Sem 5</button>
+          <button data-sem="6" class="sem-pill px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/5 text-slate-400 border border-white/10 hover:text-white transition-all">Sem 6</button>
+        </div>
+      </div>
+
+      <!-- Subject Cards Grid -->
+      <div id="academic-subjects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Injected via universe.js -->
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       VIEW 8: ASTRAEA AI ACADEMIC INTELLIGENCE
+       ========================================================================= -->
+  <section id="view-ai" class="app-view hidden relative z-10 max-w-4xl mx-auto px-4 pt-8 pb-20">
+    <div class="glass-panel rounded-3xl border border-indigo-500/30 overflow-hidden shadow-2xl flex flex-col h-[75vh]">
+      
+      <!-- AI Header -->
+      <div class="p-5 bg-[#0e0a24]/90 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">
+            ✦
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-white text-base">ASTRAEA AI</h3>
+            <p class="text-xs text-indigo-300">Context-Aware Academic & Career Copilot</p>
+          </div>
+        </div>
+        <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold font-mono">
+          Ecosystem Aware ✓
+        </span>
+      </div>
+
+      <!-- Chat Messages Scroll Area -->
+      <div id="ai-chat-messages" class="flex-1 p-6 overflow-y-auto space-y-4">
+        <!-- Injected via astraea-ai.js -->
+      </div>
+
+      <!-- Chat Input Deck -->
+      <div class="p-4 bg-[#0e0a24]/90 border-t border-white/10">
+        <div class="flex items-center gap-2">
+          <input type="text" id="ai-chat-input" class="flex-1 px-4 py-3 rounded-2xl glass-input text-xs" placeholder="Ask anything about your subjects, time budgets, or team matching (e.g. 'I have 40 mins tonight')...">
+          <button id="ai-chat-send" class="px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition-all">
+            Transmit ➔
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 9: NEXT MOVE ENGINE & TASK SHRINK
+       ========================================================================= -->
+  <section id="view-nextmove" class="app-view hidden relative z-10 max-w-4xl mx-auto px-4 pt-8 pb-20">
+    <div class="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl">
+      
+      <div class="text-center max-w-lg mx-auto mb-8">
+        <span class="text-xs uppercase tracking-widest font-mono text-amber-400 font-semibold">⚡ Dynamic Micro-Missions</span>
+        <h2 class="font-display text-3xl font-extrabold text-white mt-1">Your Next Move</h2>
+        <p class="text-xs text-slate-400 mt-1">
+          Not 37 stressful tasks. Just the one high-yield thing that matters most right now.
+        </p>
+      </div>
+
+      <!-- Time Budget Controller -->
+      <div class="p-6 rounded-2xl bg-white/5 border border-white/10 mb-8">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <span class="text-xs font-semibold text-slate-300">How much study time do you have right now?</span>
+            <div id="time-budget-display" class="font-display text-2xl font-bold text-amber-300">35 minutes</div>
+          </div>
+
+          <div class="flex gap-2">
+            <button data-time="15" class="time-chip px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-slate-300 border border-white/10">15m</button>
+            <button data-time="35" class="time-chip px-3 py-1 rounded-lg bg-indigo-600 text-xs font-mono text-white border border-indigo-400">35m</button>
+            <button data-time="60" class="time-chip px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-slate-300 border border-white/10">60m</button>
+            <button data-time="120" class="time-chip px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-slate-300 border border-white/10">120m</button>
+          </div>
+        </div>
+
+        <input type="range" id="time-budget-slider" min="15" max="120" step="5" value="35" class="w-full accent-indigo-500 cursor-pointer">
+      </div>
+
+      <!-- Task Shrink Progress -->
+      <div class="flex items-center justify-between text-xs text-slate-400 mb-3 font-mono">
+        <span id="next-move-progress-text">0 of 3 missions completed (0%)</span>
+        <span class="text-amber-300 font-bold">Earns Constellation Stars ⭐</span>
+      </div>
+
+      <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden mb-6">
+        <div id="next-move-progress-bar" class="h-full rounded-full bg-gradient-to-r from-amber-400 to-emerald-400 transition-all duration-500" style="width: 0%"></div>
+      </div>
+
+      <!-- Missions Container -->
+      <div id="next-move-missions-container" class="space-y-3">
+        <!-- Injected via next-move.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 10: OPPORTUNITIES & CONSTELLATIONS (4-WORLD TEAM BUILDER)
+       ========================================================================= -->
+  <section id="view-opportunities" class="app-view hidden relative z-10 max-w-6xl mx-auto px-4 pt-8 pb-20">
+    
+    <!-- Constellation Team Assembler -->
+    <div id="constellation-active-team">
+      <!-- Injected via constellations.js -->
+    </div>
+
+    <!-- Opportunity Radar Header -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+      <div>
+        <span class="text-xs uppercase tracking-widest font-mono text-sky-400 font-semibold">🛰️ Opportunity Radar</span>
+        <h2 class="font-display text-2xl font-bold text-white">Curated Hackathons & Projects</h2>
+      </div>
+      <span class="text-xs text-slate-400">Matched to your living Student DNA</span>
+    </div>
+
+    <!-- Opportunities Grid -->
+    <div id="opportunity-radar-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <!-- Injected via constellations.js -->
+    </div>
+
+    <!-- Cross-Specialisation Peer Matchmaker -->
+    <div class="mb-6">
+      <span class="text-xs uppercase tracking-widest font-mono text-purple-400 font-semibold">👥 Four-World Constellations</span>
+      <h2 class="font-display text-2xl font-bold text-white">Find Complementary Teammates</h2>
+      <p class="text-xs text-slate-400 mt-1">Connect with students across Nova, Quanta, and Lumina to build complete product squads.</p>
+    </div>
+
+    <div id="constellation-peers-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Injected via constellations.js -->
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       VIEW 11: CAMPUS INTELLIGENCE (MEMORY, PULSE, TIME MACHINE, EXAM RESCUE)
+       ========================================================================= -->
+  <section id="view-campus" class="app-view hidden relative z-10 max-w-6xl mx-auto px-4 pt-8 pb-20 space-y-12">
+    
+    <!-- Exam Rescue Section -->
+    <div id="exam-rescue-container">
+      <!-- Injected via campus.js -->
+    </div>
+
+    <!-- Campus Memory Section -->
+    <div>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-mono text-emerald-400 font-semibold">🔮 Campus Memory</span>
+          <h2 class="font-display text-2xl font-bold text-white">Living Wisdom & Professor Rigor</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Aggregated student intelligence on exams, course styles, and survival blueprints.</p>
+        </div>
+
+        <button onclick="window.campus.openContributeMemoryModal()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold border border-white/10 transition-all">
+          + Contribute Intel
+        </button>
+      </div>
+
+      <div id="campus-memory-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Injected via campus.js -->
+      </div>
+    </div>
+
+    <!-- Campus Pulse Live Feed -->
+    <div>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-mono text-indigo-400 font-semibold">📡 ASTRAEA Pulse</span>
+          <h2 class="font-display text-2xl font-bold text-white">Real-Time Campus Activity Feed</h2>
+        </div>
+
+        <div class="flex gap-2 flex-wrap">
+          <button data-filter="all" class="pulse-filter-btn px-3 py-1 rounded-lg text-xs bg-indigo-600 text-white font-medium">All</button>
+          <button data-filter="team" class="pulse-filter-btn px-3 py-1 rounded-lg text-xs bg-white/5 text-slate-400 hover:text-white">Teams</button>
+          <button data-filter="discussion" class="pulse-filter-btn px-3 py-1 rounded-lg text-xs bg-white/5 text-slate-400 hover:text-white">Discussions</button>
+          <button data-filter="opportunity" class="pulse-filter-btn px-3 py-1 rounded-lg text-xs bg-white/5 text-slate-400 hover:text-white">Opportunities</button>
+          <button data-filter="academic" class="pulse-filter-btn px-3 py-1 rounded-lg text-xs bg-white/5 text-slate-400 hover:text-white">Study</button>
+        </div>
+      </div>
+
+      <div id="campus-pulse-feed" class="glass-panel p-6 rounded-3xl border border-white/10 space-y-3 max-h-[420px] overflow-y-auto">
+        <!-- Injected via campus.js -->
+      </div>
+    </div>
+
+    <!-- Campus Time Machine Section -->
+    <div>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-mono text-purple-400 font-semibold">🕰️ Campus Time Machine</span>
+          <h2 class="font-display text-2xl font-bold text-white">Ecosystem Evolution Timeline</h2>
+        </div>
+
+        <div class="flex gap-2">
+          <button data-year="2026" class="time-year-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">2026 Epoch</button>
+          <button data-year="2027" class="time-year-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-white/5 text-slate-400 hover:text-white">2027 Orbit</button>
+          <button data-year="2028" class="time-year-btn px-4 py-1.5 rounded-xl text-xs font-bold bg-white/5 text-slate-400 hover:text-white">2028 Future</button>
+        </div>
+      </div>
+
+      <div id="time-machine-content">
+        <!-- Injected via campus.js -->
+      </div>
+    </div>
+
+    <!-- Career Orbit Section -->
+    <div>
+      <div class="mb-6">
+        <span class="text-xs uppercase tracking-widest font-mono text-indigo-400 font-semibold">💼 Career Orbit</span>
+        <h2 class="font-display text-2xl font-bold text-white">Where Am I Heading?</h2>
+        <p class="text-xs text-slate-400 mt-0.5">Living alignment matrix between your Student DNA and frontier industry roles.</p>
+      </div>
+
+      <div id="career-orbit-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Injected via campus.js -->
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       VIEW 12: STUDENT DNA & PROGRESS CONSTELLATION PROFILE
+       ========================================================================= -->
+  <section id="view-profile" class="app-view hidden relative z-10 max-w-6xl mx-auto px-4 pt-8 pb-20">
+    
+    <div class="glass-panel p-8 rounded-3xl border border-white/10 mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-sky-400 flex items-center justify-center text-2xl font-bold text-white shadow-xl shadow-indigo-500/30">
+          ✦
+        </div>
+        <div>
+          <h2 id="dna-student-name" class="font-display text-2xl font-extrabold text-white">Aarav Sharma</h2>
+          <p id="dna-student-spec" class="text-xs font-mono text-indigo-300">AETHER (Gen AI & Tech Mgmt) — Semester 1</p>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Verified JAIN BCA Identity</span>
+            <span id="dna-student-id" class="text-[10px] text-slate-400 font-mono">ID: JU24BCA-A042</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 text-center">
+        <div>
+          <div class="font-mono text-lg font-bold text-amber-300">⭐ 14</div>
+          <div class="text-[9px] text-slate-400">Stars Born</div>
+        </div>
+        <div class="border-l border-white/10 pl-4">
+          <div class="font-mono text-lg font-bold text-indigo-300">38</div>
+          <div class="text-[9px] text-slate-400">Missions Solved</div>
+        </div>
+        <div class="border-l border-white/10 pl-4">
+          <div class="font-mono text-lg font-bold text-emerald-300">Top 8%</div>
+          <div class="text-[9px] text-slate-400">Cohort Rank</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
+      <!-- Progress Constellation Canvas -->
+      <div class="glass-panel p-6 rounded-3xl border border-white/10">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <span class="text-xs uppercase tracking-widest font-mono text-indigo-400 font-semibold">🌌 Visual Journey</span>
+            <h3 class="font-display text-lg font-bold text-white">Your Progress Constellation</h3>
+          </div>
+          <span class="text-xs font-mono text-slate-400">"Look how far I've travelled"</span>
+        </div>
+
+        <div class="relative w-full h-[320px] rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center overflow-hidden">
+          <canvas id="progress-constellation-canvas"></canvas>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-3 text-center">Every completed micro-mission, hackathon, and course ignites a new star in your personal sky.</p>
+      </div>
+
+      <!-- Student DNA Matrix -->
+      <div class="glass-panel p-6 rounded-3xl border border-white/10">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <span class="text-xs uppercase tracking-widest font-mono text-emerald-400 font-semibold">🧬 Living Proof Profile</span>
+            <h3 class="font-display text-lg font-bold text-white">Student DNA Matrix</h3>
+          </div>
+          <span class="text-xs font-mono text-slate-400">Evidence-Backed</span>
+        </div>
+
+        <div id="student-dna-skills-container" class="space-y-3 max-h-[340px] overflow-y-auto pr-1">
+          <!-- Injected via app.js -->
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       VIEW 13: FACULTY / TEACHER COMMAND DECK (ADMIN PORTAL)
+       ========================================================================= -->
+  <section id="view-admin" class="app-view hidden relative z-10 max-w-7xl mx-auto px-4 pt-8 pb-20">
+    
+    <!-- Admin Header -->
+    <div class="glass-panel p-8 rounded-3xl border-2 border-amber-500/40 mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-gradient-to-r from-amber-950/20 via-transparent to-transparent">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold font-mono">
+            FACULTY COMMAND DECK ✦ CLEARANCE LEVEL 4
+          </span>
+        </div>
+        <h2 class="font-display text-2xl font-bold text-white">Work-Integrated BCA Academic Operations</h2>
+        <p class="text-xs text-slate-300 mt-1">Logged in: <strong>Dr. Radhakrishnan K.</strong> (Head of Specialisation & Faculty Lead)</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="window.app.navigate('view-universe')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold border border-white/10 transition-all">
+          👁️ Switch to Student View
+        </button>
+        <button onclick="window.astraeaAuth.logout()" class="px-4 py-2 rounded-xl bg-rose-600/30 hover:bg-rose-600/50 text-rose-200 text-xs font-semibold border border-rose-500/40 transition-all">
+          Lock Command Deck
+        </button>
+      </div>
+    </div>
+
+    <!-- Admin Nav Tabs -->
+    <div class="flex gap-2 border-b border-white/10 pb-3 mb-6 overflow-x-auto">
+      <button data-tab="roster" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-md transition-all">
+        📊 Student Roster & DNA
+      </button>
+      <button data-tab="moderation" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-white/5 transition-all">
+        🔮 Campus Memory Moderation
+      </button>
+      <button data-tab="broadcast" class="admin-tab-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-white/5 transition-all">
+        📡 Dispatch Pulse Alert
+      </button>
+    </div>
+
+    <!-- TAB 1: Student Roster -->
+    <div id="admin-tab-roster" class="admin-tab-content glass-panel p-6 rounded-3xl border border-white/10">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h3 class="font-display text-lg font-bold text-white">BCA Cohort Telemetry</h3>
+          <p class="text-xs text-slate-400" id="admin-student-count">8 Students Active</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <label class="text-xs text-slate-300 font-medium">Filter Specialisation:</label>
+          <select id="admin-roster-filter" class="px-3 py-1.5 rounded-xl glass-input text-xs">
+            <option value="all">All 4 Worlds</option>
+            <option value="aether">🪻 Aether (Gen AI)</option>
+            <option value="nova">🟣 Nova (Full Stack AI)</option>
+            <option value="quanta">🔵 Quanta (Data Analytics)</option>
+            <option value="lumina">🌸 Lumina (Design Tech)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 text-[11px] font-mono uppercase text-slate-400">
+              <th class="py-3 px-4">Student ID</th>
+              <th class="py-3 px-4">Full Name</th>
+              <th class="py-3 px-4">Email</th>
+              <th class="py-3 px-4">Specialisation</th>
+              <th class="py-3 px-4 text-center">Semester</th>
+              <th class="py-3 px-4">Mastery Avg</th>
+              <th class="py-3 px-4">Stars</th>
+              <th class="py-3 px-4 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-roster-tbody">
+            <!-- Injected via admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: Campus Memory Moderation Queue -->
+    <div id="admin-tab-moderation" class="admin-tab-content hidden glass-panel p-6 rounded-3xl border border-white/10">
+      <div class="mb-6">
+        <h3 class="font-display text-lg font-bold text-white">Campus Memory Corroboration Queue</h3>
+        <p class="text-xs text-slate-400 mt-0.5">Verify, certify, or flag crowdsourced student insights before they propagate.</p>
+      </div>
+
+      <div id="admin-moderation-queue" class="space-y-3">
+        <!-- Injected via admin.js -->
+      </div>
+    </div>
+
+    <!-- TAB 3: Broadcast Announcement -->
+    <div id="admin-tab-broadcast" class="admin-tab-content hidden glass-panel p-6 rounded-3xl border border-white/10 max-w-2xl">
+      <div class="mb-6">
+        <h3 class="font-display text-lg font-bold text-white">Dispatch Campus Pulse Alert</h3>
+        <p class="text-xs text-slate-400 mt-0.5">Transmit immediate high-priority alerts to student universe feeds.</p>
+      </div>
+
+      <form id="admin-broadcast-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Announcement Headline</label>
+          <input type="text" name="title" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="e.g. Kerala AI Nexus Hackathon Registration Closes in 48 Hours" required>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Category</label>
+            <select name="category" class="w-full px-3 py-3 rounded-xl glass-input text-xs">
+              <option value="opportunity">🛰️ Hackathon / Competition</option>
+              <option value="academic">📚 Study & Exam Alert</option>
+              <option value="discussion">💬 Workshop & Tech Talk</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Target Specialisation Cohort</label>
+            <select name="target" class="w-full px-3 py-3 rounded-xl glass-input text-xs">
+              <option value="All BCA Specialisations">All 4 Worlds</option>
+              <option value="Aether Gen AI">🪻 Aether Only</option>
+              <option value="Nova Full Stack">🟣 Nova Only</option>
+              <option value="Quanta Data">🔵 Quanta Only</option>
+              <option value="Lumina Design">🌸 Lumina Only</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Details & Guidelines</label>
+          <textarea name="details" rows="3" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="Enter full announcement details for student feeds..." required></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition-all">
+          ✦ TRANSMIT BROADCAST TO STUDENTS
+        </button>
+      </form>
+    </div>
+
+  </section>
+
+  <!-- =========================================================================
+       VIEW 14: TRUST CENTER & SETTINGS
+       ========================================================================= -->
+  <section id="view-settings" class="app-view hidden relative z-10 max-w-4xl mx-auto px-4 pt-8 pb-20">
+    <div class="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl space-y-8">
+      
+      <div>
+        <span class="text-xs uppercase tracking-widest font-mono text-indigo-400 font-semibold">🛡️ Trust Center & Settings</span>
+        <h2 class="font-display text-2xl font-bold text-white mt-1">Privacy, Security & Universe Controls</h2>
+        <p class="text-xs text-slate-400 mt-1">You own your data. Two-step verification protects your academic and career DNA.</p>
+      </div>
+
+      <!-- Security Settings -->
+      <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+        <h3 class="font-display text-base font-bold text-white flex items-center gap-2">
+          <span>🔐</span> Two-Step Verification (2FA) Status
+        </h3>
+        <div class="flex items-center justify-between text-xs">
+          <div>
+            <div class="font-semibold text-white">Email Two-Step Authentication (College Mail & Gmail)</div>
+            <div class="text-slate-400 text-[11px]">Required for every login session via cryptographic OTP verification token</div>
+          </div>
+          <span class="text-xs font-bold text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">Active & Enforced ✓</span>
+        </div>
+      </div>
+
+      <!-- Privacy Controls -->
+      <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+        <h3 class="font-display text-base font-bold text-white flex items-center gap-2">
+          <span>👁️</span> Profile & DNA Visibility
+        </h3>
+        
+        <div class="space-y-3 text-xs">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="privacy-setting" value="private" class="accent-indigo-500">
+            <div>
+              <div class="font-semibold text-white">Strictly Private</div>
+              <div class="text-slate-400 text-[11px]">Only visible to you and your authorized course mentors</div>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="privacy-setting" value="team" checked class="accent-indigo-500">
+            <div>
+              <div class="font-semibold text-white">Shared with Four-World Team & Constellations (Recommended)</div>
+              <div class="text-slate-400 text-[11px]">Enables auto-matchmaking for hackathons and Project Lab</div>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="privacy-setting" value="anon" class="accent-indigo-500">
+            <div>
+              <div class="font-semibold text-white">Anonymous Contributions</div>
+              <div class="text-slate-400 text-[11px]">Campus Memory reviews will conceal your student identity</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Universe Sensory Settings -->
+      <div class="p-6 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+        <h3 class="font-display text-base font-bold text-white flex items-center gap-2">
+          <span>🌌</span> Universe Sensory Engine
+        </h3>
+        
+        <div class="flex items-center justify-between text-xs">
+          <div>
+            <div class="font-semibold text-white">Cosmic Space Synthesizer (Audio)</div>
+            <div class="text-slate-400 text-[11px]">Procedural ambient hum and star-birth chimes via Web Audio API</div>
+          </div>
+          <button onclick="window.cosmicAudio.toggleMute(); window.app.showToast('Audio preferences updated', 'info');" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-semibold">
+            Toggle Sound
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between text-xs pt-3 border-t border-white/5">
+          <div>
+            <div class="font-semibold text-white">Reduced Motion Mode</div>
+            <div class="text-slate-400 text-[11px]">Calms background star drift and shooting stars</div>
+          </div>
+          <button onclick="window.cosmicCanvas.setReducedMotion(!window.cosmicCanvas.reducedMotion); window.app.showToast('Motion settings updated', 'info');" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold">
+            Toggle Motion
+          </button>
+        </div>
+      </div>
+
+      <div class="pt-4 flex items-center justify-between">
+        <button onclick="window.app.showToast('Privacy & universe preferences successfully saved.', 'success')" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition-all">
+          Save Preferences
+        </button>
+
+        <button onclick="window.app.resetAllState()" class="text-xs text-rose-400 hover:underline">
+          Purge Local Cache & Reset
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       MODAL 1: SUBJECT STAR SYSTEM & CONNECTED KNOWLEDGE GRAPH
+       ========================================================================= -->
+  <div id="subject-star-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-3xl rounded-3xl border border-indigo-500/40 p-6 md:p-8 max-h-[90vh] overflow-y-auto shadow-2xl relative">
+      
+      <button onclick="window.universe.closeSubjectModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg">
+        ✕
+      </button>
+
+      <div class="flex items-center gap-2 mb-2">
+        <span id="modal-subj-code" class="font-mono text-xs text-indigo-400 uppercase tracking-widest font-bold">BCA-AET101</span>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold font-mono">
+          Mastery: <span id="modal-subj-mastery">72%</span>
+        </span>
+      </div>
+
+      <h2 id="modal-subj-title" class="font-display text-2xl md:text-3xl font-extrabold text-white mb-2">Context Engineering</h2>
+      <p id="modal-subj-desc" class="text-xs text-slate-300 mb-6 leading-relaxed">
+        Advanced semantic memory management, vector embeddings, dynamic context injection, and attention window optimization.
+      </p>
+
+      <div class="w-full bg-white/5 h-2 rounded-full overflow-hidden mb-8">
+        <div id="modal-subj-bar" class="h-full rounded-full bg-gradient-to-r from-purple-500 via-indigo-500 to-sky-400 transition-all duration-700" style="width: 72%"></div>
+      </div>
+
+      <!-- Connected Knowledge Topology Graph -->
+      <div class="mb-8 p-6 rounded-2xl bg-[#090616] border border-indigo-500/30">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <span class="text-xs uppercase tracking-widest font-mono text-indigo-400 font-semibold">✦ Connected Knowledge Graph</span>
+            <h4 class="text-sm font-bold text-white">How Knowledge Connects & Synthesizes</h4>
+          </div>
+          <span class="text-[10px] text-slate-400 font-mono">Zero Syllabus Silos</span>
+        </div>
+
+        <div id="modal-subj-knowledge-graph" class="flex flex-wrap items-center justify-start gap-2 py-2 overflow-x-auto">
+          <!-- Injected via universe.js -->
+        </div>
+      </div>
+
+      <!-- High Yield Exam Cheat Sheet & Micro-Topics -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-5 rounded-2xl bg-white/5 border border-white/5">
+          <h4 class="font-display text-sm font-bold text-white mb-3 flex items-center gap-1.5">
+            <span class="text-amber-400">⚡</span> High-Yield Exam Takeaways
+          </h4>
+          <ul id="modal-subj-exam-topics" class="space-y-2">
+            <!-- Injected via universe.js -->
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-white/5 border border-white/5">
+          <h4 class="font-display text-sm font-bold text-white mb-3 flex items-center gap-1.5">
+            <span class="text-indigo-400">🧩</span> Micro-Topic Mastery Nodes
+          </h4>
+          <div id="modal-subj-topics-list" class="space-y-2">
+            <!-- Injected via universe.js -->
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+        <button onclick="window.universe.closeSubjectModal(); window.app.navigate('view-nextmove');" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all">
+          ⚡ Launch Micro-Missions for this Subject
+        </button>
+        <button onclick="window.universe.closeSubjectModal()" class="text-xs text-slate-400 hover:text-white">
+          Close Star System
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: CONTRIBUTE TO CAMPUS MEMORY
+       ========================================================================= -->
+  <div id="contribute-memory-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-lg rounded-3xl border border-white/10 p-6 md:p-8 shadow-2xl relative">
+      
+      <button onclick="window.campus.closeContributeMemoryModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-lg">
+        ✕
+      </button>
+
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold">🔮 Campus Memory Queue</span>
+      </div>
+
+      <h2 class="font-display text-2xl font-bold text-white mb-1">Contribute Experience</h2>
+      <p class="text-xs text-slate-400 mb-6">
+        Your insight will be aggregated and verified by the faculty council before certification.
+      </p>
+
+      <form onsubmit="event.preventDefault(); window.campus.submitContributedMemory(Object.fromEntries(new FormData(this)));" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Subject Name</label>
+          <input type="text" name="subject" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="e.g. Context Engineering & GenAI" required>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Course Professor / Instructor</label>
+          <input type="text" name="professor" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="e.g. Dr. Radhakrishnan K." required>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Difficulty & Rigor Rating (1 to 10)</label>
+          <input type="number" step="0.1" min="1" max="10" name="difficulty" value="8.0" class="w-full px-4 py-3 rounded-xl glass-input text-xs font-mono" required>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Core Campus Intel</label>
+          <textarea name="insight" rows="2" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="What is their teaching/testing style? (e.g. focus on practical reasoning vs definitions)..." required></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Survival Strategy Advice</label>
+          <input type="text" name="advice" class="w-full px-4 py-3 rounded-xl glass-input text-xs" placeholder="e.g. Master the FastAPI homework endpoints early..." required></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/30 transition-all">
+          ✦ SUBMIT TO CAMPUS MEMORY QUEUE
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/cosmic-canvas.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/universe.js"></script>
+  <script src="js/astraea-ai.js"></script>
+  <script src="js/next-move.js"></script>
+  <script src="js/constellations.js"></script>
+  <script src="js/campus.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+
